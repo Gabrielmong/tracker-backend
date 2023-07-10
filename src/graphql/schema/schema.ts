@@ -1,33 +1,37 @@
-export const typeDefs = `#graphql
-  type Book {
-    title: String
-    author: String
-  }
+import { gql } from 'graphql-tag';
+import {
+  accountType,
+  accountTypeMutations,
+  accountTypeQueries,
+  accountTypeSubscriptions,
+} from './account';
+import { userType, userTypeMutations, userTypeQueries } from './user';
+import {
+  transactionType,
+  transactionTypeMutations,
+  transactionTypeQueries,
+  transactionTypeSubscriptions,
+} from './transaction';
 
-  type EditBook {
-    oldTitle: String
-    oldAuthor: String
-    title: String
-    author: String
-  }
+export const typeDefs = gql`  
+  ${accountType}
+  ${transactionType}
+  ${userType}
 
   type Query {
-    books: [Book]
+    ${accountTypeQueries}
+    ${transactionTypeQueries}
+    ${userTypeQueries}
   }
 
   type Mutation {
-    addBook(title: String, author: String): Book
-    deleteBook(title: String): Book
-    updateBook(
-      oldTitle: String
-      oldAuthor: String
-      title: String
-      author: String
-    ): EditBook
+    ${accountTypeMutations}
+    ${transactionTypeMutations}
+    ${userTypeMutations}
   }
-  
+
   type Subscription {
-    bookAdded(author: String): Book  
+    ${accountTypeSubscriptions}
+    ${transactionTypeSubscriptions}
   }
-  
 `;

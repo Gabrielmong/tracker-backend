@@ -1,63 +1,83 @@
 import { GraphQLError } from 'graphql';
-import { books } from '../mock';
 import { ApolloServerErrorCode } from '@apollo/server/errors';
 import { PubSub, withFilter } from 'graphql-subscriptions';
+import {
+  userMutations,
+  userQueries,
+  accountMutations,
+  accountQueries,
+  transactionMutations,
+  transactionQueries,
+} from '../../db';
 
-const pubsub = new PubSub();
+export const pubsub = new PubSub();
 
 export const resolvers = {
   Query: {
-    books: () => books,
+    account: accountQueries.account,
+    accounts: accountQueries.accounts,
+    transaction: transactionQueries.transaction,
+    transactions: transactionQueries.transactions,
+    user: userQueries.user,
+    users: userQueries.users,
   },
   Mutation: {
-    addBook: (parent, args) => {
-      const newBook = {
-        title: args.title,
-        author: args.author,
-      };
-      books.push(newBook);
-
-      pubsub.publish('BOOK_ADDED', { bookAdded: newBook });
-
-      return newBook;
-    },
-    deleteBook: (parent, args) => {
-      const bookIndex = books.findIndex((book) => book.title === args.title);
-      if (bookIndex === -1) {
-        throw new Error('Book not found');
-      }
-      const deletedBook = books[bookIndex];
-      books.splice(bookIndex, 1);
-      return deletedBook;
-    },
-    updateBook: (parent, args) => {
-      const bookIndex = books.findIndex(
-        (book) =>
-          book.title === args.oldTitle && book.author === args.oldAuthor,
-      );
-      if (bookIndex === -1) {
-        throw new GraphQLError('Book not found', {
-          extensions: {
-            code: ApolloServerErrorCode.PERSISTED_QUERY_NOT_FOUND,
-          },
-        });
-      }
-
-      const updatedBook = {
-        title: args.title,
-        author: args.author,
-      };
-      books[bookIndex] = updatedBook;
-
-      return updatedBook;
-    },
+    addAccount: accountMutations.addAccount,
+    addTransaction: transactionMutations.addTransaction,
+    addUser: userMutations.addUser,
+    deleteAccount: accountMutations.deleteAccount,
+    deleteTransaction: transactionMutations.deleteTransaction,
+    deleteUser: userMutations.deleteUser,
+    updateAccount: accountMutations.updateAccount,
+    updateTransaction: transactionMutations.updateTransaction,
+    updateUser: userMutations.updateUser,
   },
   Subscription: {
-    bookAdded: {
+    accountAdded: {
       subscribe: withFilter(
-        () => pubsub.asyncIterator('BOOK_ADDED'),
+        () => pubsub.asyncIterator('ACCOUNT_ADDED'),
         (payload, variables) => {
-          return payload.bookAdded.author === variables.author;
+          return payload.accountAdded.userId === variables.userId;
+        },
+      ),
+    },
+    transactionAdded: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator('TRANSACTION_ADDED'),
+        (payload, variables) => {
+          return payload.transactionAdded.userId === variables.userId;
+        },
+      ),
+    },
+    accountUpdated: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator('ACCOUNT_UPDATED'),
+        (payload, variables) => {
+          return payload.accountUpdated.userId === variables.userId;
+        },
+      ),
+    },
+    transactionUpdated: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator('TRANSACTION_UPDATED'),
+        (payload, variables) => {
+          return payload.transactionUpdated.userId === variables.userId;
+        },
+      ),
+    },
+    accountDeleted: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator('ACCOUNT_DELETED'),
+        (payload, variables) => {
+          return payload.accountDeleted.userId === variables.userId;
+        },
+      ),
+    },
+    transactionDeleted: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator('TRANSACTION_DELETED'),
+        (payload, variables) => {
+          return payload.transactionDeleted.userId === variables.userId;
         },
       ),
     },
