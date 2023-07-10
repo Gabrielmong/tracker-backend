@@ -1,8 +1,12 @@
 import { Prisma } from '..';
 
 export const transactionQueries = {
-  transactions: async () => {
-    return await Prisma.transaction.findMany();
+  transactions: async (parent, args) => {
+    return await Prisma.transaction.findMany({
+      where: {
+        userId: args.userId,
+      },
+    });
   },
   transaction: async (parent, args) => {
     return await Prisma.transaction.findUnique({

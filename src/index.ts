@@ -17,7 +17,9 @@ const version = process.env.npm_package_version;
 
 app.use(
   '/graphql',
-  cors<cors.CorsRequest>(),
+  cors<cors.CorsRequest>({
+    origin: '*',
+  }),
   bodyParser.json(),
   expressMiddleware(apolloServer),
 );

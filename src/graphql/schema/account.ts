@@ -16,7 +16,7 @@ export const accountType = `
 `;
 
 export const accountTypeQueries = `
-  accounts: [Account]
+  accounts(userId: String): [Account]
   account(id: String): Account
 `;
 

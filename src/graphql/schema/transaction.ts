@@ -1,12 +1,14 @@
 export const transactionType = `
   type Transaction {
     account: Account
+    accountId: String
     amount: Float
     category: String
     createdAt: String
     date: String
     description: String
     id: String!
+    title: String
     type: String
     updatedAt: String
     user: User
@@ -16,7 +18,7 @@ export const transactionType = `
 
 export const transactionTypeQueries = `
     transaction(id: String): Transaction
-    transactions: [Transaction]
+    transactions(userId: String): [Transaction]
 `;
 
 export const transactionTypeMutations = `
@@ -27,6 +29,7 @@ export const transactionTypeMutations = `
     date: String
     description: String
     type: String
+    title: String
     userId: String
   ): Transaction
   
@@ -40,6 +43,7 @@ export const transactionTypeMutations = `
     description: String
     id: String
     type: String
+    title: String
     userId: String
   ): Transaction
 `;

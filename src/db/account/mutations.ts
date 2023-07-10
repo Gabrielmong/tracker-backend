@@ -16,8 +16,18 @@ export const accountMutations = {
           },
         },
       },
-      include: {
+      select: {
+        balance: true,
+        bank: true,
+        createdAt: true,
+        currency: true,
+        id: true,
+        name: true,
+        number: true,
+        type: true,
+        updatedAt: true,
         user: true,
+        userId: true,
       },
     });
 
