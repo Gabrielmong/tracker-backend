@@ -67,6 +67,12 @@ export const accountMutations = {
     return account;
   },
   deleteAccount: async (parent, args) => {
+    await Prisma.transaction.deleteMany({
+      where: {
+        accountId: args.id,
+      },
+    });
+
     const account = await Prisma.account.delete({
       where: {
         id: args.id,

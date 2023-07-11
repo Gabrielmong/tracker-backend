@@ -8,6 +8,7 @@ export const transactionType = `
     date: String
     description: String
     id: String!
+    sentTo: String
     title: String
     type: String
     updatedAt: String
@@ -31,6 +32,7 @@ export const transactionTypeMutations = `
     type: String
     title: String
     userId: String
+    sentTo: String
   ): Transaction
   
   deleteTransaction(id: String): Transaction
@@ -45,6 +47,7 @@ export const transactionTypeMutations = `
     type: String
     title: String
     userId: String
+    sentTo: String
   ): Transaction
 `;
 

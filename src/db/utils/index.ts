@@ -1,4 +1,5 @@
 import { Prisma } from '..';
+import { pubsub } from '../../graphql';
 
 export const updateAccountBalance = async (
   accountId: string,
@@ -16,7 +17,7 @@ export const updateAccountBalance = async (
 
   const newBalance = account.balance + amount;
 
-  return await Prisma.account.update({
+  const updated = await Prisma.account.update({
     where: {
       id: accountId,
     },
@@ -24,4 +25,10 @@ export const updateAccountBalance = async (
       balance: newBalance,
     },
   });
+
+  pubsub.publish('ACCOUNT_UPDATED', {
+    accountUpdated: updated,
+  });
+
+  return updated;
 };

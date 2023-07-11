@@ -10,6 +10,9 @@ export const transactionMutations = {
         category: args.category,
         date: new Date(args.date),
         description: args.description,
+        sentTo: args.sentTo,
+        title: args.title,
+        type: args.type,
         account: {
           connect: {
             id: args.accountId,
@@ -60,6 +63,9 @@ export const transactionMutations = {
         category: args.category,
         date: new Date(args.date),
         description: args.description,
+        sentTo: args.sentTo,
+        title: args.title,
+        type: args.type,
         account: {
           connect: {
             id: args.accountId,
