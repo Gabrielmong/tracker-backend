@@ -1,13 +1,13 @@
-import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 import dotenv from 'dotenv';
-dotenv.config();
+import express from 'express';
 import routes from './routes';
 import { createServer } from 'http';
-import cors from 'cors';
-import bodyParser from 'body-parser';
 import { expressMiddleware } from '@apollo/server/express4';
 import { startApolloServer } from './graphql';
 
+dotenv.config();
 const app = express();
 const httpServer = createServer(app);
 const apolloServer = await startApolloServer({ httpServer });

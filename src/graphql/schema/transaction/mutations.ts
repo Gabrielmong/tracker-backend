@@ -1,5 +1,4 @@
-import { Prisma } from '..';
-import { pubsub } from '../../graphql';
+import { pubsub, Prisma } from '../../config';
 import { updateAccountBalance } from '../utils';
 
 export const transactionMutations = {

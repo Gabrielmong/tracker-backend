@@ -1,5 +1,4 @@
-import { Prisma } from '..';
-import { pubsub } from '../../graphql';
+import { pubsub, Prisma } from '../../config';
 
 export const updateAccountBalance = async (
   accountId: string,

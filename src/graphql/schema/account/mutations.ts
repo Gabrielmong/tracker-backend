@@ -1,5 +1,5 @@
-import { Prisma } from '..';
-import { pubsub } from '../../graphql';
+import { pubsub, Prisma } from '../../config/';
+
 export const accountMutations = {
   addAccount: async (parent, args) => {
     const account = await Prisma.account.create({

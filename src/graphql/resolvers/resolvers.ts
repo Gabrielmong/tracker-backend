@@ -1,16 +1,15 @@
 import { GraphQLError } from 'graphql';
 import { ApolloServerErrorCode } from '@apollo/server/errors';
-import { PubSub, withFilter } from 'graphql-subscriptions';
+import { withFilter } from 'graphql-subscriptions';
 import {
-  userMutations,
-  userQueries,
   accountMutations,
   accountQueries,
   transactionMutations,
   transactionQueries,
-} from '../../db';
-
-export const pubsub = new PubSub();
+  userMutations,
+  userQueries,
+} from '../schema';
+import { pubsub } from '../config';
 
 export const resolvers = {
   Query: {

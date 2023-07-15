@@ -4,14 +4,14 @@ import {
   accountTypeMutations,
   accountTypeQueries,
   accountTypeSubscriptions,
-} from './account';
-import { userType, userTypeMutations, userTypeQueries } from './user';
-import {
   transactionType,
   transactionTypeMutations,
   transactionTypeQueries,
   transactionTypeSubscriptions,
-} from './transaction';
+  userType,
+  userTypeMutations,
+  userTypeQueries,
+} from '../schema';
 
 export const typeDefs = gql`  
   ${accountType}

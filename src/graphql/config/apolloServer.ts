@@ -2,7 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { useServer } from 'graphql-ws/lib/use/ws';
-import { resolvers } from './resolvers';
+import { resolvers } from '../resolvers';
 import { typeDefs } from './schema';
 import { WebSocketServer } from 'ws';
 import { Server } from 'graphql-ws';

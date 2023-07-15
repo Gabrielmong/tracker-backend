@@ -1,4 +1,4 @@
-import { Prisma } from '..';
+import { Prisma } from '../../config';
 
 export const transactionQueries = {
   transactions: async (parent, args) => {

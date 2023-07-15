@@ -1,1 +1,3 @@
-export { typeDefs } from './schema';
+export * from './user';
+export * from './transaction';
+export * from './account';
