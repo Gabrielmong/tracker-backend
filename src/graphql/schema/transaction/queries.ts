@@ -10,16 +10,33 @@ export const transactionQueries = {
         account: true,
         user: true,
       },
+      skip: args.skip,
+      take: args.take,
+      orderBy: {
+        // newest first
+        date: 'desc',
+      },
     });
   },
   transaction: async (parent, args) => {
-    return await Prisma.transaction.findUnique({
+    const transaction = await Prisma.transaction.findUnique({
       where: {
         id: args.id,
       },
       include: {
         account: true,
         user: true,
+      },
+    });
+
+    console.log(transaction);
+
+    return transaction;
+  },
+  transactionsCount: async (parent, args) => {
+    return await Prisma.transaction.count({
+      where: {
+        userId: args.userId,
       },
     });
   },

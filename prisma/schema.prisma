@@ -12,27 +12,27 @@ datasource db {
 
 model User {
   accounts     Account[]
-  createdAt    DateTime      @default(now())
+  createdAt    DateTime      @default(now()) @db.Timestamp(6)
   email        String        @unique
   id           String        @id @default(uuid())
   lastName     String?
   name         String?
   password     String
   transactions Transaction[]
-  updatedAt    DateTime      @updatedAt
+  updatedAt    DateTime      @updatedAt @db.Timestamp(6)
 }
 
 model Account {
   balance      Float
   bank         String
-  createdAt    DateTime      @default(now())
+  createdAt    DateTime      @default(now()) @db.Timestamp(6)
   currency     String
   id           String        @id @default(uuid())
   name         String
   number       String
   transactions Transaction[]
   type         String
-  updatedAt    DateTime      @updatedAt
+  updatedAt    DateTime      @updatedAt @db.Timestamp(6)
   user         User          @relation(fields: [userId], references: [id])
   userId       String
 }
@@ -42,13 +42,13 @@ model Transaction {
   accountId   String
   amount      Float
   category    String
-  createdAt   DateTime @default(now())
-  date        DateTime
+  createdAt   DateTime @default(now()) @db.Timestamp(6)
+  date        DateTime @db.Timestamp(6)
   description String
   id          String   @id @default(uuid())
   title       String   @default("")
   type        String   @default("")
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @updatedAt @db.Timestamp(6)
   user        User     @relation(fields: [userId], references: [id])
   userId      String
   sentTo      String

@@ -17,6 +17,7 @@ export const resolvers = {
     accounts: accountQueries.accounts,
     transaction: transactionQueries.transaction,
     transactions: transactionQueries.transactions,
+    transactionsCount: transactionQueries.transactionsCount,
     user: userQueries.user,
     users: userQueries.users,
   },

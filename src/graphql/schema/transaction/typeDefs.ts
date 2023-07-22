@@ -19,7 +19,11 @@ export const transactionType = `
 
 export const transactionTypeQueries = `
     transaction(id: String): Transaction
-    transactions(userId: String): [Transaction]
+    transactions(userId: String,
+      skip: Int,
+      take: Int
+    ): [Transaction]
+    transactionsCount(userId: String): Int
 `;
 
 export const transactionTypeMutations = `
