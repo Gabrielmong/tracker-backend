@@ -1,4 +1,4 @@
-import { pubsub, Prisma } from '../../config/';
+import { Prisma, pubsub } from '../../../config/';
 
 export const accountMutations = {
   addAccount: async (parent, args) => {

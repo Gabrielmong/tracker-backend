@@ -5,7 +5,7 @@ import express from 'express';
 import routes from './routes';
 import { createServer } from 'http';
 import { expressMiddleware } from '@apollo/server/express4';
-import { startApolloServer } from './graphql';
+import startApolloServer from './apollo';
 
 dotenv.config();
 const app = express();

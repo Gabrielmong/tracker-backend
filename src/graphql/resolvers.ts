@@ -8,8 +8,8 @@ import {
   transactionQueries,
   userMutations,
   userQueries,
-} from '../schema';
-import { pubsub } from '../../config';
+} from './schema';
+import { pubsub } from '../config';
 
 export const resolvers = {
   Query: {

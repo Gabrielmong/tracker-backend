@@ -1,4 +1,4 @@
-import { pubsub, Prisma } from '../../config';
+import { Prisma, pubsub } from '../../../config';
 
 export const updateAccountBalance = async (
   accountId: string,

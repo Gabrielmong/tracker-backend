@@ -11,7 +11,7 @@ import {
   userType,
   userTypeMutations,
   userTypeQueries,
-} from '../schema';
+} from '../graphql';
 
 export const typeDefs = gql`  
   ${accountType}

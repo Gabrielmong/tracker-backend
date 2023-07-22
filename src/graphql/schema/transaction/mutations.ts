@@ -1,4 +1,4 @@
-import { pubsub, Prisma } from '../../config';
+import { Prisma, pubsub } from '../../../config';
 import { updateAccountBalance } from '../utils';
 
 export const transactionMutations = {
